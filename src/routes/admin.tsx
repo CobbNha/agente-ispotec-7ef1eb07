@@ -203,17 +203,17 @@ function Painel() {
   const gravar = useServerFn(guardarDocumento);
   const remover = useServerFn(apagarDocumento);
 
-  const estado = useQuery({ queryKey: ["estado-admin"], queryFn: () => verEstado({ data: {} }) });
+  const estado = useQuery({ queryKey: ["estado-admin"], queryFn: () => verEstado() });
   const souAdmin = estado.data?.souAdmin === true;
 
   const documentos = useQuery({
     queryKey: ["documentos"],
-    queryFn: () => verDocumentos({ data: {} }),
+    queryFn: () => verDocumentos(),
     enabled: souAdmin,
   });
   const relatorio = useQuery({
     queryKey: ["relatorio"],
-    queryFn: () => verRelatorio({ data: {} }),
+    queryFn: () => verRelatorio(),
     enabled: souAdmin,
   });
   const categorias = useQuery({
@@ -235,7 +235,7 @@ function Painel() {
   const [ficheiro, setFicheiro] = useState<File | null>(null);
 
   const assumirPapel = useMutation({
-    mutationFn: () => assumir({ data: {} }),
+    mutationFn: () => assumir(),
     onSuccess: () => {
       toast.success("Já é administrador desta plataforma.");
       void clienteQuery.invalidateQueries();

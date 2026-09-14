@@ -77,11 +77,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "ISPOTEC AI — Assistente Inteligente Institucional" },
+      {
+        name: "description",
+        content:
+          "Assistente inteligente do ISPOTEC com respostas baseadas nos documentos oficiais da instituição.",
+      },
+      { name: "author", content: "ISPOTEC" },
+      { property: "og:title", content: "ISPOTEC AI — Assistente Inteligente Institucional" },
+      {
+        property: "og:description",
+        content:
+          "Assistente inteligente do ISPOTEC com respostas baseadas nos documentos oficiais da instituição.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
