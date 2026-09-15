@@ -38,17 +38,20 @@ export const Route = createFileRoute("/api/chat")({
 
         let partes: Awaited<ReturnType<typeof procurarConhecimento>> = [];
         try {
-          if (pergunta) partes = await procurarConhecimento(pergunta, { limite: 6 });
+          if (pergunta) partes = await procurarConhecimento(pergunta, { limite: 12 });
         } catch (erro) {
           console.error("Falha na pesquisa de conhecimento:", erro);
         }
 
-        const relevantes = partes.filter((p) => p.similaridade > 0.35);
+        // Mantém as partes claramente relevantes; se nenhuma passar o limiar,
+        // usa as melhores encontradas para o modelo poder interpretar o conteúdo.
+        const fortes = partes.filter((p) => p.similaridade > 0.3);
+        const relevantes = (fortes.length > 0 ? fortes : partes).slice(0, 8);
         const fontes = [...new Set(relevantes.map((p) => p.titulo))];
 
         const gateway = createLovableAiGatewayProvider(apiKey);
         const resultado = streamText({
-          model: gateway("google/gemini-3.8-flash"),
+          model: gateway("openai/gpt-6-astra"),
           system: instrucoesSistema(perfil, construirContexto(relevantes)),
           messages: await convertToModelMessages(mensagens),
         });
