@@ -1,6 +1,26 @@
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 
 const GATEWAY_URL = "https://ai.gateway.lovable.dev/v1";
+const GOOGLE_URL = "https://generativelanguage.googleapis.com/v1beta";
+
+/** Chave gratuita do Google (Gemini), quando configurada. */
+export function chaveGoogle(): string | undefined {
+  return process.env["GOOGLE_GEMINI_API_KEY"] || undefined;
+}
+
+export const MODELO_GOOGLE = "gemini-3.6-flash";
+export const MODELO_EMBEDDINGS_GOOGLE = "gemini-embedding-001";
+
+export function createOpenAICompatible_unused() {}
+
+/** Provedor que fala com a API gratuita do Google (compatível com OpenAI). */
+export function createGoogleProvider(apiKey: string) {
+  return createOpenAICompatible({
+    name: "google",
+    baseURL: `${GOOGLE_URL}/openai`,
+    apiKey,
+  });
+}
 
 export function createLovableAiGatewayProvider(apiKey: string) {
   return createOpenAICompatible({
@@ -12,6 +32,7 @@ export function createLovableAiGatewayProvider(apiKey: string) {
     },
   });
 }
+
 
 /** Divide um texto longo em partes com sobreposição, para pesquisa semântica. */
 export function dividirTexto(texto: string, tamanho = 1200, sobreposicao = 150): string[] {
