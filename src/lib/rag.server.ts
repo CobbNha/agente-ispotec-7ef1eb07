@@ -14,8 +14,9 @@ export async function procurarConhecimento(
   pergunta: string,
   opcoes: { incluirInternos?: boolean; limite?: number } = {},
 ): Promise<ParteEncontrada[]> {
-  const apiKey = process.env["LOVABLE_API_KEY"];
-  if (!apiKey) throw new Error("Falta a configuração da IA (LOVABLE_API_KEY).");
+  const apiKey = chaveGoogle() ?? process.env["LOVABLE_API_KEY"];
+  if (!apiKey) throw new Error("Falta a configuração da IA (chave do Google ou LOVABLE_API_KEY).");
+
 
   const [vector] = await criarEmbeddings(apiKey, [pergunta]);
   if (!vector) return [];
