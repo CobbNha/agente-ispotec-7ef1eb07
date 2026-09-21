@@ -1,7 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 
-import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
+import {
+  chaveGoogle,
+  createGoogleProvider,
+  createLovableAiGatewayProvider,
+  MODELO_GOOGLE,
+} from "@/lib/ai-gateway.server";
+
 import { construirContexto, instrucoesSistema, procurarConhecimento } from "@/lib/rag.server";
 
 type CorpoPedido = {
