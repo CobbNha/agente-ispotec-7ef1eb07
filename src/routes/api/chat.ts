@@ -34,10 +34,12 @@ export const Route = createFileRoute("/api/chat")({
           return new Response("É necessário enviar uma pergunta.", { status: 400 });
         }
 
-        const apiKey = process.env["LOVABLE_API_KEY"];
+        const google = chaveGoogle();
+        const apiKey = google ?? process.env["LOVABLE_API_KEY"];
         if (!apiKey) {
           return new Response("A IA não está configurada neste projecto.", { status: 500 });
         }
+
 
         const perfil = corpo.perfil ?? "estudante";
         const pergunta = textoDaMensagem(mensagens[mensagens.length - 1]);
