@@ -11,7 +11,6 @@ export function chaveGoogle(): string | undefined {
 export const MODELO_GOOGLE = "gemini-3.6-flash";
 export const MODELO_EMBEDDINGS_GOOGLE = "gemini-embedding-001";
 
-export function createOpenAICompatible_unused() {}
 
 /** Provedor que fala com a API gratuita do Google (compatível com OpenAI). */
 export function createGoogleProvider(apiKey: string) {
