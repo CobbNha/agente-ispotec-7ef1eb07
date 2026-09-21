@@ -1,4 +1,4 @@
-import { criarEmbeddings } from "./ai-gateway.server";
+import { chaveGoogle, criarEmbeddings } from "./ai-gateway.server";
 
 export type ParteEncontrada = {
   documento_id: string;
