@@ -57,6 +57,9 @@ export function dividirTexto(texto: string, tamanho = 1200, sobreposicao = 150):
 
 /** Cria embeddings (vectores) para um conjunto de textos, em lotes seguros. */
 export async function criarEmbeddings(apiKey: string, textos: string[]): Promise<number[][]> {
+  const google = chaveGoogle();
+  if (google) return criarEmbeddingsGoogle(google, textos);
+
   const resultados: number[][] = [];
   const lote = 20;
   for (let i = 0; i < textos.length; i += lote) {
@@ -81,3 +84,34 @@ export async function criarEmbeddings(apiKey: string, textos: string[]): Promise
   }
   return resultados;
 }
+
+/** Embeddings pela API gratuita do Google, com as mesmas 3072 dimensões. */
+async function criarEmbeddingsGoogle(apiKey: string, textos: string[]): Promise<number[][]> {
+  const resultados: number[][] = [];
+  const lote = 20;
+  for (let i = 0; i < textos.length; i += lote) {
+    const bloco = textos.slice(i, i + lote);
+    const resposta = await fetch(
+      `${GOOGLE_URL}/models/${MODELO_EMBEDDINGS_GOOGLE}:batchEmbedContents`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
+        body: JSON.stringify({
+          requests: bloco.map((texto) => ({
+            model: `models/${MODELO_EMBEDDINGS_GOOGLE}`,
+            content: { parts: [{ text: texto }] },
+            outputDimensionality: 3072,
+          })),
+        }),
+      },
+    );
+    if (!resposta.ok) {
+      const detalhe = await resposta.text();
+      throw new Error(`Falha ao criar embeddings (${resposta.status}): ${detalhe.slice(0, 300)}`);
+    }
+    const json = (await resposta.json()) as { embeddings: { values: number[] }[] };
+    for (const item of json.embeddings ?? []) resultados.push(item.values);
+  }
+  return resultados;
+}
+
