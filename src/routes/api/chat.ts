@@ -57,12 +57,15 @@ export const Route = createFileRoute("/api/chat")({
         const relevantes = (fortes.length > 0 ? fortes : partes).slice(0, 8);
         const fontes = [...new Set(relevantes.map((p) => p.titulo))];
 
-        const gateway = createLovableAiGatewayProvider(apiKey);
+        const modelo = google
+          ? createGoogleProvider(google)(MODELO_GOOGLE)
+          : createLovableAiGatewayProvider(apiKey)("openai/gpt-6-astra");
         const resultado = streamText({
-          model: gateway("openai/gpt-6-astra"),
+          model: modelo,
           system: instrucoesSistema(perfil, construirContexto(relevantes)),
           messages: await convertToModelMessages(mensagens),
         });
+
 
         return resultado.toUIMessageStreamResponse({
           originalMessages: mensagens,
