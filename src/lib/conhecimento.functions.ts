@@ -90,8 +90,9 @@ export const guardarDocumento = createServerFn({ method: "POST" })
     });
     if (!isAdmin) throw new Error("Sem permissão.");
 
-    const apiKey = process.env["LOVABLE_API_KEY"];
+    const apiKey = process.env["GOOGLE_GEMINI_API_KEY"] || process.env["LOVABLE_API_KEY"];
     if (!apiKey) throw new Error("A IA não está configurada neste projecto.");
+
 
     const { data: documento, error } = await context.supabase
       .from("documentos")
