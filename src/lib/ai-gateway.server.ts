@@ -8,8 +8,29 @@ export function chaveGoogle(): string | undefined {
   return process.env["GOOGLE_GEMINI_API_KEY"] || undefined;
 }
 
-export const MODELO_GOOGLE = "gemini-3.6-flash";
+export const MODELO_GOOGLE = "gemini-3.5-flash-lite";
 export const MODELO_EMBEDDINGS_GOOGLE = "gemini-embedding-001";
+
+const GROQ_URL = "https://api.groq.com/openai/v1";
+
+/** Modelo principal pedido: openai/gpt-oss-120b na GroqCloud. */
+export const MODELO_GROQ = "openai/gpt-oss-120b";
+/** Contingência dentro da própria GroqCloud. */
+export const MODELO_GROQ_ALT = "llama-3.3-70b-versatile";
+
+/** Chave da GroqCloud, quando configurada. */
+export function chaveGroq(): string | undefined {
+  return process.env["GROQ_API_KEY"] || undefined;
+}
+
+/** Provedor que fala com a GroqCloud (compatível com OpenAI). */
+export function createGroqProvider(apiKey: string) {
+  return createOpenAICompatible({
+    name: "groq",
+    baseURL: GROQ_URL,
+    apiKey,
+  });
+}
 
 
 /** Provedor que fala com a API gratuita do Google (compatível com OpenAI). */
