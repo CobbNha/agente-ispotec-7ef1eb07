@@ -37,7 +37,11 @@ function textoDaMensagem(mensagem: UIMessage | undefined): string {
     .trim();
 }
 
-type Motor = { nome: string; modelo: LanguageModel; opcoes?: Record<string, unknown> };
+type Motor = {
+  nome: string;
+  modelo: LanguageModel;
+  opcoes?: Record<string, Record<string, string>>;
+};
 
 /** Ordem de tentativa: GroqCloud → Google Gemini → Gateway Lovable. */
 function motores(): Motor[] {
