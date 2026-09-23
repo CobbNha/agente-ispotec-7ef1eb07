@@ -9,6 +9,7 @@ import {
   CreditCard,
   GraduationCap,
   Landmark,
+  MessageCircle,
   Library,
   Lock,
   ReceiptText,
