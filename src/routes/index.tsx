@@ -248,6 +248,9 @@ function Assistente() {
                 <p className="mt-1 text-sm text-muted-foreground">{areaActiva.descricao}</p>
               </div>
               <Button asChild variant="outline" size="icon" className="shrink-0 md:hidden">
+                <a href="https://cdn.botpress.cloud/webchat/v3.5/shareable.html?configUrl=https://files.bpcontent.cloud/2026/01/25/21/20260125215138-GUF14096.json" target="_blank" rel="noopener noreferrer" aria-label="ISPOTEC Chatbot"><MessageCircle className="size-4" /></a>
+              </Button>
+              <Button asChild variant="outline" size="icon" className="shrink-0 md:hidden">
                 <Link to="/admin" aria-label="Área de administração"><Lock className="size-4" /></Link>
               </Button>
             </div>
