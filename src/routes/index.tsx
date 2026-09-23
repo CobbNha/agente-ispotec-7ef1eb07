@@ -184,7 +184,7 @@ function Assistente() {
   });
 
   const aTrabalhar = status === "submitted" || status === "streaming";
-  const areaActiva = AREAS.find((area) => area.valor === perfil) ?? AREAS[0];
+  const areaActiva = AREAS.find((area) => area.valor === perfil) ?? AREAS[0]!;
 
   useEffect(() => {
     if (!aTrabalhar) areaTexto.current?.focus();
