@@ -237,7 +237,7 @@ function Assistente() {
               <a href="https://ispotec-online-2026.vercel.app/" target="_blank" rel="noopener noreferrer"><GraduationCap className="size-4" /> ISPOTEC Online</a>
             </Button>
             <Button asChild variant="ghost" className="w-full justify-start gap-3 text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground">
-              <a href="https://ispotec-online-2026.vercel.app/" target="_blank" rel="noopener noreferrer"><Building2 className="size-4" /> Clínica Universitária do ISPOTEC</a>
+              <a href="http://clinica-ispotec.ct.ws/" target="_blank" rel="noopener noreferrer"><Building2 className="size-4" /> Clínica Universitária do ISPOTEC</a>
             </Button>
             <Button asChild variant="ghost" className="w-full justify-start gap-3 text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground">
               <Link to="/admin"><Lock className="size-4" /> Administração</Link>
@@ -260,7 +260,7 @@ function Assistente() {
                 <a href="https://ispotec-online-2026.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="ISPOTEC Online"><GraduationCap className="size-4" /></a>
               </Button>
               <Button asChild variant="outline" size="icon" className="shrink-0 md:hidden">
-                <a href="https://ispotec-online-2026.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Clínica Universitária do ISPOTEC"><Building2 className="size-4" /></a>
+                <a href="http://clinica-ispotec.ct.ws/" target="_blank" rel="noopener noreferrer" aria-label="Clínica Universitária do ISPOTEC"><Building2 className="size-4" /></a>
               </Button>
               <Button asChild variant="outline" size="icon" className="shrink-0 md:hidden">
                 <Link to="/admin" aria-label="Área de administração"><Lock className="size-4" /></Link>
