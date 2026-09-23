@@ -9,6 +9,7 @@ import {
   CreditCard,
   GraduationCap,
   Landmark,
+  MessageCircle,
   Library,
   Lock,
   ReceiptText,
@@ -183,7 +184,7 @@ function Assistente() {
   });
 
   const aTrabalhar = status === "submitted" || status === "streaming";
-  const areaActiva = AREAS.find((area) => area.valor === perfil) ?? AREAS[0];
+  const areaActiva = AREAS.find((area) => area.valor === perfil) ?? AREAS[0]!;
 
   useEffect(() => {
     if (!aTrabalhar) areaTexto.current?.focus();
@@ -228,7 +229,10 @@ function Assistente() {
               );
             })}
           </nav>
-          <div className="border-t border-sidebar-border p-4">
+          <div className="border-t border-sidebar-border p-4 space-y-1">
+            <Button asChild variant="ghost" className="w-full justify-start gap-3 text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground">
+              <a href="https://cdn.botpress.cloud/webchat/v3.5/shareable.html?configUrl=https://files.bpcontent.cloud/2026/01/25/21/20260125215138-GUF14096.json" target="_blank" rel="noopener noreferrer"><MessageCircle className="size-4" /> ISPOTEC Chatbot</a>
+            </Button>
             <Button asChild variant="ghost" className="w-full justify-start gap-3 text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground">
               <Link to="/admin"><Lock className="size-4" /> Administração</Link>
             </Button>
@@ -243,6 +247,9 @@ function Assistente() {
                 <h2 className="mt-1 text-xl font-semibold sm:text-2xl">{areaActiva.nome}</h2>
                 <p className="mt-1 text-sm text-muted-foreground">{areaActiva.descricao}</p>
               </div>
+              <Button asChild variant="outline" size="icon" className="shrink-0 md:hidden">
+                <a href="https://cdn.botpress.cloud/webchat/v3.5/shareable.html?configUrl=https://files.bpcontent.cloud/2026/01/25/21/20260125215138-GUF14096.json" target="_blank" rel="noopener noreferrer" aria-label="ISPOTEC Chatbot"><MessageCircle className="size-4" /></a>
+              </Button>
               <Button asChild variant="outline" size="icon" className="shrink-0 md:hidden">
                 <Link to="/admin" aria-label="Área de administração"><Lock className="size-4" /></Link>
               </Button>
